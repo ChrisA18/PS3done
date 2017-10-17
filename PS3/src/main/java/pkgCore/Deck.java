@@ -2,6 +2,7 @@ package pkgCore;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 import pkgEnum.eRank;
 import pkgEnum.eSuit;
@@ -19,19 +20,69 @@ public class Deck {
 		Collections.shuffle(cardsInDeck);
 	}
 
-	//TODO: Fix the Draw method so it throws an exception if the deck is empty
+	// Fix the Draw method so it throws an exception if the deck is empty
 	public Card Draw() {
-		return cardsInDeck.remove(0);
+		try {
+			return cardsInDeck.remove(0);
+		}
+		catch (Exception DeckException) {
+			System.out.println("Deck Empty");
+			throw DeckException;
+		}
 	}
 	
-	//TODO: Write an overloaded Draw method to Draw a card of a given eSuit
+	// Write an overloaded Draw method to Draw a card of a given eSuit
+	public Card Draw(eSuit eSuit) {
+		for(Card c: this.cardsInDeck){
+			if (c.geteSuit() == eSuit) {
+				cardsInDeck.remove(c);
+				return c;
+			}
 	
-	//TODO: Write an overloaded Draw method to Draw a card of a given eRank
-
-	//TODO: Write a method that will return the number of a given eSuit left in the deck.
+		}
+		return null;
+	}
 	
-	//TODO: Write a method that will return the number of a given eRank left in the deck.
 	
-	//TODO: Write a method that will return 0 or 1 if a given card is left in the deck.
+	// Write an overloaded Draw method to Draw a card of a given eRank
+	public Card Draw(eRank eRank) {
+		for(Card c: this.cardsInDeck) {
+			if(c.geteRank() == eRank) {
+				cardsInDeck.remove(c);
+				return c;
+			}
+			
+		}
+		return null;
+	}
+		
+	// Write a method that will return the number of a given eSuit left in the deck.
+	public int SCount(eSuit eSuit) {
+		int suitLeft = 0;
+		for (Card c: cardsInDeck) {
+			if(c.geteSuit() == eSuit)
+				suitLeft++;
+		}
+		return suitLeft++;
+		
+	}
 	
+	// Write a method that will return the number of a given eRank left in the deck.
+	public int RCount(eRank eRank) {
+		int rankLeft = 0;
+		for (Card c: cardsInDeck) {
+			if(c.geteRank() == eRank)
+				rankLeft++;
+		}
+		return rankLeft++;
+	}
+	
+	// Write a method that will return 0 or 1 if a given card is left in the deck.
+	public int cardsLeft(Card c) {
+		for(Card cards:cardsInDeck){
+			if(cards == c)
+				return 1;
+		}
+		return 0;
+	}
 }
