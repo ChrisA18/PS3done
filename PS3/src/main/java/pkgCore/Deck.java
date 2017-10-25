@@ -9,7 +9,7 @@ import pkgEnum.eSuit;
 
 public class Deck {
 
-	private ArrayList<Card> cardsInDeck;
+	private ArrayList<Card> cardsInDeck = new ArrayList<Card>();;
 
 	public Deck() {
 		for (eSuit eSuit : eSuit.values()) {
